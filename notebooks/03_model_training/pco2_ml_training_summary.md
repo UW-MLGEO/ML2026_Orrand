@@ -122,9 +122,15 @@ The training dataset came from the **7 NOAA buoy sites** and included **479 buoy
 
 The **target variable** (what we're predicting) was `pco2_mean` — the daily average pCO₂ in µatm (micro-atmospheres).
 
+
 ### Distribution by Site
 
-Although ~100 buoy-days were sampled per site, the final counts are uneven because satellite data availability varied — some sites lost more rows due to cloud cover or missing chl-a composites:
+We initially sampled ~100 buoy-days per site for training (see bar plot below).
+
+![Samples per Site](../../plots/training_data_eda/01_samples_per_site.png)
+*Bar plot: Initial number of buoy-days sampled per site (before filtering).*
+
+However, after filtering for satellite data availability (removing days with missing SST or chl-a), the final counts per site became uneven, as shown in the table below. Some sites lost more rows due to cloud cover or missing satellite composites.
 
 | Site | Records | Share |
 |---|---:|---:|
@@ -135,8 +141,6 @@ Although ~100 buoy-days were sampled per site, the final counts are uneven becau
 | LA Buoy | 56 | 11.6% |
 | La Push | 34 | 7.1% |
 | First Landing | 33 | 6.9% |
-
-![Samples per Site](../../plots/training_data_eda/01_samples_per_site.png)
 
 ### Key Variable Ranges
 
