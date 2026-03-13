@@ -123,24 +123,13 @@ The training dataset came from the **7 NOAA buoy sites** and included **479 buoy
 The **target variable** (what we're predicting) was `pco2_mean` — the daily average pCO₂ in µatm (micro-atmospheres).
 
 
+
 ### Distribution by Site
 
-We initially sampled ~100 buoy-days per site for training (see bar plot below).
+The bar plot below shows the final number of training samples per buoy site, after filtering for satellite data availability (i.e., only buoy-days with both SST and chlorophyll-a satellite data were included). The total number of samples is less than the initial target due to missing satellite data for some days and sites.
 
-![Samples per Site](../../plots/training_data_eda/01_samples_per_site.png)
-*Bar plot: Initial number of buoy-days sampled per site (before filtering).*
-
-However, after filtering for satellite data availability (removing days with missing SST or chl-a), the final counts per site became uneven, as shown in the table below. Some sites lost more rows due to cloud cover or missing satellite composites.
-
-| Site | Records | Share |
-|---|---:|---:|
-| Southern California | 140 | 29.2% |
-| South Pacific | 94 | 19.6% |
-| SE Bering Sea | 62 | 12.9% |
-| Grays Reef | 60 | 12.6% |
-| LA Buoy | 56 | 11.6% |
-| La Push | 34 | 7.1% |
-| First Landing | 33 | 6.9% |
+![Training Samples per Buoy Site](../../plots/training_data_eda/01_samples_per_site.png)
+*Bar plot: Final number of buoy-days per site with both SST and chlorophyll-a satellite data available (used for model training).*
 
 ### Key Variable Ranges
 
