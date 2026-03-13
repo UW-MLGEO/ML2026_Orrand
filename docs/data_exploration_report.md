@@ -131,7 +131,7 @@ These scatter plots show the two main predictor-target relationships the ML mode
 - `training_data_700_ml_ready.csv` — 479 rows with both SST + chl-a present
 
 **Next steps:**
-1. Train baseline ML models (Random Forest, Gradient Boosting) to predict pCO2
+1. Train baseline ML models (Linear Regression, Random Forest) to predict pCO2
 2. Evaluate with train/test split, report RMSE and R²
 3. Analyze feature importance to understand which satellite features matter most
 4. Consider adding temporal features (month, season) to capture seasonality
