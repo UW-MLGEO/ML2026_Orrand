@@ -187,7 +187,7 @@ The plot below shows each model's predictions (y-axis) against the actual measur
 
 ![Predicted vs Actual pCO2](../../plots/ml_results/01_predicted_vs_actual.png)
 
-**What we see:** Linear Regression has the most scatter (points far from the line), while Random Forest clusters much more tightly around the diagonal — meaning it made more accurate predictions.
+**What we see:** Linear Regression has the most scatter (points far from the line), while Random Forest clusters much more tightly around the diagonal — meaning it made more accurate predictions. **The Gradient Boosting Graph is residual from previous modeling attempts, and is a relic that I was not able to remove from the plot for the purposes of this project deliverable, but shows what a different model would look like if it were to be used in this class project.**
 
 ---
 
