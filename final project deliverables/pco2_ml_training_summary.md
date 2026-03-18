@@ -21,7 +21,7 @@
 
 Oceans play a very important role in regulating Earth's climate. Among other key operations, ocean waters absorb roughly 30% of carbon dioxide (CO₂) emissions from the atmosphere along with taking on 90% of excess heat generated from these CO₂ emissions. This makes the ocean one of the most important carbon "sinks" on the planet. Without the ocean taking on this excess man-made CO₂, global temperatures would be much higher due to the greenhouse gas effect trapping heat and gases within Earth's atmosphere.
 
-![Ocean Carbon Uptake — The Solubility Pump](../../plots/pmel_carbonuptake.jpg)
+![Ocean Carbon Uptake — The Solubility Pump](../plots/pmel_carbonuptake.jpg)
 *Figure: The ocean solubility pump — CO₂ from the atmosphere dissolves into surface waters and is transported to depth. (Source: [NOAA PMEL](https://www.pmel.noaa.gov/co2/story/Ocean+Carbon+Uptake))*
 
 Over time, the ability of the ocean to continue to absorb CO₂ is changing. Processes such as this are governed by key chemical and physical laws of nature. Understanding how much CO₂ the ocean can absorb and hold is important to quantifying its ability to operate as a vital carbon sink for planet Earth.
@@ -61,13 +61,13 @@ Two satellite products were retrieved from the **NOAA ERDDAP** data server:
 
 - **JPL MUR SST v4.1** — A multi-sensor sea surface temperature product at ~4.6 km (0.042°) resolution with daily global coverage. 
 
-![ERDDAP Satellite SST](../../plots/ERDDAP%20SST.png)
+![ERDDAP Satellite SST](../plots/ERDDAP SST.png)
 
 *Figure: Example satellite SST retrieval from NOAA ERDDAP showing sea surface temperature around a buoy site.*
 
 - **MODIS Aqua Chlorophyll-a** — Ocean color-derived chlorophyll-a concentration at ~4 km resolution in 8-day composites. Chl-a serves as a proxy for phytoplankton biomass and biological CO₂ uptake.
 
-![Global Chlorophyll-a Concentration](../../plots/worldmap_chl.sm.png)
+![Global Chlorophyll-a Concentration](../plots/worldmap_chl.sm.png)
 *Figure: Global ocean chlorophyll-a concentration from MODIS Aqua. (Source: [NASA Ocean Color](https://oceandata.sci.gsfc.nasa.gov/gallery/778/))*
 
 Rather than downloading bulk satellite archives, the satellite data was queried on-demand — after the buoy data was cleaned and a training sample was selected, ERDDAP API calls were made to retrieve only the SST and chl-a observations corresponding to the specific dates and locations present in the buoy training dataset.
@@ -103,7 +103,7 @@ The returned satellite statistics were then joined to the corresponding buoy rec
 
 As a sanity check, satellite SST was validated against the co-located buoy SST measurements. The comparison showed an excellent match (**r = 0.998, RMSE = 0.50°C**), confirming that the satellite SST data is a reliable proxy for in-situ temperature at these sites.
 
-![SST Validation: Satellite vs. Buoy](../../plots/training_data_eda/02_sst_validation_scatter.png)
+![SST Validation: Satellite vs. Buoy](../plots/training_data_eda/02_sst_validation_scatter.png)
 *Figure: Satellite SST vs. in-situ buoy SST showing strong linear agreement across all sites.*
 
 ### Phase 4 — Feature Scaling and ML-Ready Export
@@ -129,7 +129,7 @@ The **target variable** (what we're predicting) was `pco2_mean` — the daily av
 
 The bar plot below shows the final number of training samples per buoy site, after filtering for satellite data availability (i.e., only buoy-days with both SST and chlorophyll-a satellite data were included). The total number of samples is less than the initial target due to missing satellite data for some days and sites.
 
-![Training Samples per Buoy Site](../../plots/training_data_eda/01_samples_per_site.png)
+![Training Samples per Buoy Site](../plots/training_data_eda/01_samples_per_site.png)
 *Bar plot: Final number of buoy-days per site with both SST and chlorophyll-a satellite data available (used for model training).*
 
 ### Key Variable Ranges
@@ -137,7 +137,7 @@ The bar plot below shows the final number of training samples per buoy site, aft
 - **SST:** −1.79°C to 32.33°C (mean: 18.2 ± 7.6°C)
 - **pCO₂:** 93–895 µatm (mean: 396 ± 89 µatm) — values below ~400 µatm indicate the ocean is acting as a carbon sink; above ~400 µatm as a carbon source.
 
-![pCO₂ by Site](../../plots/training_data_eda/03_pco2_by_site_boxplot.png)
+![pCO₂ by Site](../plots/training_data_eda/03_pco2_by_site_boxplot.png)
 
 ---
 
@@ -185,7 +185,7 @@ We tested two models of increasing complexity:
 
 The plot below shows each model's predictions (y-axis) against the actual measured pCO₂ values (x-axis). Points on the dashed 1:1 line are perfect predictions. The further a point is from the line, the worse that individual prediction was.
 
-![Predicted vs Actual pCO2](../../plots/ml_results/01_predicted_vs_actual.png)
+![Predicted vs Actual pCO2](../plots/ml_results/01_predicted_vs_actual.png)
 
 **What we see:** Linear Regression has the most scatter (points far from the line), while Random Forest clusters much more tightly around the diagonal — meaning it made more accurate predictions.
 
@@ -195,7 +195,7 @@ The plot below shows each model's predictions (y-axis) against the actual measur
 
 Residuals are simply **Actual − Predicted**. Ideally, residuals should be randomly scattered around zero with no patterns. If we see a trend, it means the model is systematically over- or under-predicting in certain ranges.
 
-![Residual Analysis](../../plots/ml_results/02_residuals.png)
+![Residual Analysis](../plots/ml_results/02_residuals.png)
 
 **What we see:** The residuals for the best model are roughly centered around zero, which is a good sign. The histogram on the right shows most errors are small, with only a few larger misses.
 
@@ -205,7 +205,7 @@ Residuals are simply **Actual − Predicted**. Ideally, residuals should be rand
 
 One powerful thing about tree-based models is they can tell us **which input features mattered most** for making predictions. This isn't just useful for building better models — it teaches us something about what drives pCO₂ in the ocean.
 
-![Feature Importance](../../plots/ml_results/03_feature_importance.png)
+![Feature Importance](../plots/ml_results/03_feature_importance.png)
 
 **What we see:** The features related to **SST** (sea surface temperature) tend to be the most important predictors of pCO₂, followed by **location** (latitude/longitude) and **chlorophyll-a** features. This makes physical sense — temperature strongly controls how much CO₂ the ocean can hold.
 
@@ -215,7 +215,7 @@ One powerful thing about tree-based models is they can tell us **which input fea
 
 Not all ocean locations are equally easy to predict. Some sites (like open-ocean buoys) have more predictable patterns, while coastal or estuary sites can have complex local dynamics that are harder to capture.
 
-![Predictions by Site](../../plots/ml_results/04_predictions_by_site.png)
+![Predictions by Site](../plots/ml_results/04_predictions_by_site.png)
 
 **What we see:** The model performs better at some sites than others. Sites where points hug the 1:1 line are well-predicted; sites with more scatter have higher error — these may need more training data or additional features to improve.
 
